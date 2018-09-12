@@ -1,0 +1,37 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="header">Main page title</div>
+<div class = "menu">
+  <ul>
+    <li>	<a href="index.html">Home</a></li>
+    <li>	<a href="login.html">Login</a></li>
+    <li>	<a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<div class="main">
+	<div id="field_id">
+		<p><b>login</b>
+			<input class="field" type="text" size="40">
+		</p>
+		<p><b>password</b>
+			<input type="password" size="40">
+		</p>
+  </div>
+   <input type="submit" onclick="show()" class="field" value="log in" size="40">
+  </p>
+</div>
+<script>
+	var d = document.getElementById('field_id');
+	d.style.display = "none"
+
+	function show(){
+	d.style.display = "block"
+	}
+</script>
+</body>
+<footer></footer>
+</html>
