@@ -17,3 +17,10 @@ window.onclick = function(event) {
         modal_reg.style.display = "none";
     }
 }
+
+function myAjax() {
+      $.ajax({
+           type: "POST",
+           url: 'logout.php',
+      });
+ }
