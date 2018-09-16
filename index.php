@@ -1,19 +1,18 @@
 <html>
-<?php 
-	include 'header.php';
+	<?php 
+		include 'header.php';
 
-	$dbhost="localhost";
-	$dbuser = "root"; 
-	$dbpass = ""; 
-	$dbname = "Base";
+		$dbhost="localhost";
+		$dbuser = "root"; 
+		$dbpass = ""; 
+		$dbname = "Base";
 
-	$con = mysqli_connect($dbhost, $dbuser, $dbpass);
+		$con = mysqli_connect($dbhost, $dbuser, $dbpass);
 
-	$db = mysqli_select_db($con, $dbname);
+		$db = mysqli_select_db($con, $dbname);
 
-	$res = mysqli_query($con, "SELECT * FROM users");
-
-?>
+		$res = mysqli_query($con, "SELECT * FROM users");
+	?>
 	<div class="main">
 		<table>
 		  <caption>
@@ -36,13 +35,27 @@
 		  while($result = mysqli_fetch_assoc($res)) {
 		  	echo "<tr>";
 		  	echo "<th>$result[id]</th>";
-		  	echo "<th>$result[Login]</th>";
+		  	echo "<th>";
+		  	if(!($_SESSION['role']=='guest')) {
+		  		echo "<a href='profile.php?user=".$result['Login']."'>$result[Login]</a>";
+		  	} else {
+		  		echo "$result[Login]";
+		  		echo !$_SESSION['role']=='guest';
+		  	}
+		  	"</th>";
 		  	echo "<th>$result[Name]</th>";
 		  	echo "<th>$result[Surname]</th>";
 		  	echo "<th>$result[role]</th>";
 		  	echo "<th><img src=\"$result[Photo]\"></th>";
 		    if($_SESSION['role']=='admin')
-		  		echo "<th><a href=''>X</a></th>";
+		    	echo '
+		    	<th>
+				<form action="delet.php" method="POST">
+				  <button type="submit" name="id" value="'.$result['id'].'">X</button>
+				</form>
+				</th>
+				';	
+		  		// echo "<th><form action=delet.php method=\"POST\"><a href='' name=\"id\">X</a></form></th>";
 		  	echo "</tr>";
 		  }
 		  ?>

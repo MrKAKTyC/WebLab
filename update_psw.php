@@ -1,13 +1,9 @@
 <?php
 
-$dbhost="localhost"; //replace with your hostname
-
-$dbuser = "root"; //replace with your admin username
-
-$dbpass = ""; //password of your admin
-
+$dbhost="localhost";
+$dbuser = "root";
+$dbpass = "";
 $dbname = "Base";
-
 $con = mysqli_connect($dbhost, $dbuser, $dbpass);
 
 if($con){
@@ -19,9 +15,11 @@ if(!$db){
 echo "Could not connect to database ".mysqli_error($con);
 
 } else {
-	$sql = "UPDATE users SET Photo='photo/"."2.png"."' WHERE Login='"."Max"."'";
-	echo $sql."<br>";
-	$res = mysqli_query($con, $sql);
+
+	if ($_POST['new_psw']==$_POST['new_psw2']) {
+		$sql = "UPDATE users SET Password='".$_POST['new_psw']."' WHERE Login='".$_POST['u_name']."'";
+		echo $sql."<br>";
+		$res = mysqli_query($con, $sql);
 		  while($result = mysqli_fetch_assoc($res)) {
 		  	echo $result['id'];
 		  	echo $result['Name'];
@@ -29,11 +27,14 @@ echo "Could not connect to database ".mysqli_error($con);
 		  	echo $result['role'];
 		  	echo $result['Photo'];
 		  }
+		header("Location:profile.php?user=".$_POST['u_name'])
+	}
 	}
 } else {
 
 echo "could not connect to server";
 
 }
+
 
 ?>

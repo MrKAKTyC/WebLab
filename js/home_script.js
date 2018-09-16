@@ -18,9 +18,19 @@ window.onclick = function(event) {
     }
 }
 
-function myAjax() {
+function delet_f(int id) {
       $.ajax({
            type: "POST",
-           url: 'logout.php',
+           url: 'delet.php',
+           data: {
+            
+           }
+           success: function(data) {
+            if (data){
+              window.location.reload(); // This is not jQuery but simple plain ol' JS
+            } else {
+              alert("error");
+            }
+          }
       });
  }
