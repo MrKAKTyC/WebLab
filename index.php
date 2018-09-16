@@ -57,7 +57,7 @@
 
 		<!-- Register form -->
 	<div id="id_reg" class="modal">
-	  <form class="modal-content animate" action="register.php">
+	  <form class="modal-content animate" action="register.php" method="POST">
 	    <div class="imgcontainer">
 	      <span onclick="document.getElementById('id_reg').style.display='none'" class="close" title="Close Modal">&times;</span>
 	    </div>
@@ -69,7 +69,7 @@
 	      <input type="password" placeholder="Enter Password" name="psw" required>
 	      
 	      <label for="psw"><b>Role</b></label><br>
-	      <select  name="dropdown">
+	      <select  name="role">
 	        <option>user</option>
 	        <option>admin</option>
 	      </select><br>

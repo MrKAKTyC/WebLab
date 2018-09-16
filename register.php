@@ -11,20 +11,24 @@
 
 	$con = mysqli_connect($dbhost, $dbuser, $dbpass);
 
-if($con){
+	if($con){
 
-	$db = mysqli_select_db($con, $dbname);
+		$db = mysqli_select_db($con, $dbname);
 
-	if(!$db){
+		if(!$db){
 
-		echo "Could not connect to database ".mysqli_error($con);
+			echo "Could not connect to database ".mysqli_error($con);
 
 		} else {
-			$res = mysqli_query($con, "INSERT INTO 'users'('Login', 'Password', 'role', 'Name', 'Surname', 'Photo') VALUES ([".$_POST['login']."],[".$_POST['psw']."],[".$_POST['role']."],[".$_POST['name']."],[".$_POST['surname']."],[photo/def.png])");
-			while($result = mysqli_fetch_assoc($res)) {
-			echo "$result[id]";
-			header('Location: index.php');
+
+			$sql = "INSERT INTO `users`(`Login`, `Password`, `role`, `Name`,`Surname`, `Photo`)      VALUES ('".$_POST['login']."','".$_POST['psw']."','".$_POST['role']."','".$_POST['name']."','".$_POST['surname']."','photo/def.png')";
+
+			echo "$sql";
+			$res = mysqli_query($con, $sql);
+			if($res){
+				echo "scs";
 			}
+			// header('Location: index.php');
 		}
 	} else {
 
