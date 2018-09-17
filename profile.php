@@ -17,6 +17,7 @@
 			$sql = "SELECT * FROM users WHERE Login = '".$login."'";
 			$res = mysqli_query($con, $sql);
 			$result = mysqli_fetch_assoc($res);
+
 			$sql = "SELECT * FROM users WHERE Login = '".$_SESSION['login']."'";
 			$res = mysqli_query($con, $sql);
 			$c_res = mysqli_fetch_assoc($res);
@@ -34,7 +35,7 @@
 			<p class="leftline">Login</p>
 			<p class="rightline"><input type="text" name="login" value="<?php
 			 echo $result['Login'].'"';
-			 if($result['Login']!=$_SESSION['login']){
+			 if($c_role!='admin'){
 				 	echo ' readonly';
 			 } 
 			 ?>></p>
@@ -42,7 +43,7 @@
 			<p class="leftline">Name</p>
 			<p class="rightline"><input type="text" name="name" value="<?php
 				echo $result['Name'].'"';
-				if($result['Login']!=$_SESSION['login']){
+				if($result['Login']!=$_SESSION['login'] & $c_role!='admin'){
 					echo ' readonly';
 				} 
 			?>></p>
@@ -50,7 +51,7 @@
 			<p class="leftline">Surname</p>
 			<p class="rightline"><input type="text" name="sname" value="<?php
 			 echo $result['Surname'].'"';
-				if($result['Login']!=$_SESSION['login']){
+				if($result['Login']!=$_SESSION['login'] & $c_role!='admin'){
 					echo ' readonly';
 				} 
 			?>></p>
@@ -73,9 +74,10 @@
 				?>
 				</select></p>
 				<input type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
-				<?php if($c_role=='admin' || $login == $result['Login']) {echo "<button type=\"submit\">Save</button>";}?>
+				<?php if($c_role=='admin' || $_SESSION['login'] == $result['Login']) {echo "<button type=\"submit\">Save</button>";}?>
 			</form>
 			<br>
+			<!-- PASSWORD DIV -->
 			<div <?php if($result['Login']!=$_SESSION['login']) {echo ' style = "display: none"';}?>>
 				<form method="POST" action="update_psw.php">
 					<p class="leftline">Old password</p>
@@ -91,14 +93,16 @@
 				</form>
 			</div>
 		</div>
+		<!-- IMAGE DIV -->
 		<div class="pic">
 			<form enctype="multipart/form-data" method="POST" action="update_foto.php">
 				<img src=<?php echo $result['Photo']; ?> height="128" width="128">
 				<br>
 				<input type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
 				<input type="hidden" name="f_name" value="<?php echo $result['Photo']; ?>" >
+				<?php if($c_role=='admin' || $_SESSION['login'] == $result['Login']) {echo '
 				<input type="file" name="fileToUpload" id="fileToUpload">
-				<?php if($c_role=='admin' || $login == $result['Login']) {echo "<button type=\"submit\">Update</button>";}?>
+				<button type="submit">Update</button>';}?>
 			</form>
 			
 		</div>
@@ -106,9 +110,7 @@
 			function go_home() {
 				window.location.replace("index.php");
 			}
-
 		</script>
-
 		<div style="clear: both; margin-left: auto; margin-right: auto;">
 			<button onclick="go_home()";>Back</button>
 		</div>

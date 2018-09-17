@@ -18,9 +18,16 @@ if($con){
 
 		if ($_POST['new_psw']==$_POST['new_psw2']) {
 			if (strlen($_POST['new_psw'])>=6) {
-				$sql = "UPDATE users SET Password='".$_POST['new_psw']."' WHERE Login='".$_POST['u_name']."'";
+				$sql = "SELECT Password FROM users WHERE Login='".$_POST['u_name']."'";
 				$res = mysqli_query($con, $sql);
-				header("Location:profile.php?user=".$_POST['u_name']);
+				$result = mysqli_fetch_assoc($res);
+				if ($_POST['old_psw']==$result['Password']) {
+					$sql = "UPDATE users SET Password='".$_POST['new_psw']."' WHERE Login='".$_POST['u_name']."'";
+					$res = mysqli_query($con, $sql);
+					header("Location:profile.php?user=".$_POST['u_name']);
+				} else {
+					echo "Wrong Password";
+				}
 			} else {
 				echo "Password is too short";
 			}

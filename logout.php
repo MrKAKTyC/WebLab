@@ -3,5 +3,5 @@
 	unset($_SESSION['role']);
 	unset($_SESSION['login']);
 	// echo "DONE";
-	// header("Location: index.php");
+	header("Location: index.php");
 ?>

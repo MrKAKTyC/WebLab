@@ -46,7 +46,7 @@
 		  	echo "<th>$result[Name]</th>";
 		  	echo "<th>$result[Surname]</th>";
 		  	echo "<th>$result[role]</th>";
-		  	echo "<th><img src=\"$result[Photo]\"></th>";
+		  	echo '<th><img src='.$result['Photo'].' height="128" width="128"></th>';
 		    if($_SESSION['role']=='admin')
 		    	echo '
 		    	<th>
