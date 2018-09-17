@@ -13,7 +13,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/home_script.js"></script>
 		<script type="text/javascript" src="js/profile_script.js"></script>
-		<script src="js/slider.js"></script>
 	</head>
 	<body>
     <div class="header">Club hub</div>
@@ -33,14 +32,9 @@
 			if ($_SESSION['role']=='guest') {
 				echo '<button onclick="document.getElementById(\'id01\').style.display=\'block\'" style="width:auto;">Login</button>';
 			} else {
-				echo "<form action=\"logout.php\" method=\"POST\">";
-				echo "<button onclick=>Logoff</button>";
-				echo "</form>";
+				echo '<button id = "l_out" style="width:auto;" >Logoff</button>';
 			}
 			?>
-
-
-
 		</p>
 		<div style="clear: both;"></div>	
 	</div>

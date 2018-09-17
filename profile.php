@@ -1,4 +1,5 @@
 <?php
+	include 'header.php';
 	$login = $_GET['user'];
 	$dbhost="localhost";
 	$dbuser = "root";
@@ -6,7 +7,6 @@
 	$dbname = "Base";
 
 	$con = mysqli_connect($dbhost, $dbuser, $dbpass);
-
 	$result = [];
 
 	if($con){
@@ -17,6 +17,10 @@
 			$sql = "SELECT * FROM users WHERE Login = '".$login."'";
 			$res = mysqli_query($con, $sql);
 			$result = mysqli_fetch_assoc($res);
+			$sql = "SELECT * FROM users WHERE Login = '".$_SESSION['login']."'";
+			$res = mysqli_query($con, $sql);
+			$c_res = mysqli_fetch_assoc($res);
+			$c_role = $c_res['role'];
 		}
 	} else {
 		echo "could not connect to server";
@@ -24,8 +28,8 @@
 ?>
 
 <html>
-	<?php include 'header.php'; ?>
 	<div class="profile main">
+		<form method="POST" action="update_info.php">
 		<div class="info">
 			<p class="leftline">Login</p>
 			<p class="rightline"><input type="text" name="login" value="<?php
@@ -53,7 +57,7 @@
 			<br>
 			<p class="leftline">Role</p>
 			<p class="rightline">
-				<select name="role">
+				<select name="role" <?php if($c_role=='user') {echo "disabled";}?>>
 				<?php
 					if($result['role']=='user') {
 						echo "
@@ -68,6 +72,9 @@
 					}
 				?>
 				</select></p>
+				<input type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
+				<?php if($c_role=='admin' || $login == $result['Login']) {echo "<button type=\"submit\">Save</button>";}?>
+			</form>
 			<br>
 			<div <?php if($result['Login']!=$_SESSION['login']) {echo ' style = "display: none"';}?>>
 				<form method="POST" action="update_psw.php">
@@ -85,19 +92,25 @@
 			</div>
 		</div>
 		<div class="pic">
-			<form enctype="multipart/form-data" method="POST" action="upload_foto.php">
+			<form enctype="multipart/form-data" method="POST" action="update_foto.php">
 				<img src=<?php echo $result['Photo']; ?> height="128" width="128">
 				<br>
 				<input type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
+				<input type="hidden" name="f_name" value="<?php echo $result['Photo']; ?>" >
 				<input type="file" name="fileToUpload" id="fileToUpload">
-				<button type="submit">Update</button>
+				<?php if($c_role=='admin' || $login == $result['Login']) {echo "<button type=\"submit\">Update</button>";}?>
 			</form>
 			
 		</div>
-		<div style="clear: both; margin-left: auto; margin-right: auto;">
-			<button>Back</button>
-			<button>Save</button>
+		<script type="text/javascript">
+			function go_home() {
+				window.location.replace("index.php");
+			}
 
+		</script>
+
+		<div style="clear: both; margin-left: auto; margin-right: auto;">
+			<button onclick="go_home()";>Back</button>
 		</div>
 	</div>
 	<?php include 'footer.php'; ?>
