@@ -80,20 +80,18 @@
 
 		  <label for="psw"><b>Password</b></label>
 	      <input type="password" placeholder="Enter Password" name="psw" required>
-	      
+	      <br>
 	      <label for="psw"><b>Role</b></label><br>
 	      <select  name="role">
 	        <option>user</option>
 	        <option>admin</option>
-	      </select><br>
-
+	      </select>
+	      <br>
 	      <label for="name"><b>Name</b></label>
 	      <input type="text" placeholder="Enter name" name="name" required>
-
 	      <label for="surname"><b>Surname</b></label>
 	      <input type="text" placeholder="Enter surname" name="surname" required>
-
-	        
+	      <br>
 	      <button type="submit">Add</button>
 	    </div>
 	  </form>
