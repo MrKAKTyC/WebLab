@@ -23,7 +23,7 @@ if($con){
 		  	echo "$result[id]";
 		  	$_SESSION['role']=$result['role'];
 		  	$_SESSION['login']= $result['Login'];
-		  	header('Location: index.php');
+		  	// header('Location: index.php');
 		}
 
 	} else {

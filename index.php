@@ -48,14 +48,9 @@
 		  	echo "<th>$result[role]</th>";
 		  	echo '<th><img src='.$result['Photo'].' height="128" width="128"></th>';
 		    if($_SESSION['role']=='admin')
-		    	echo '
-		    	<th>
-				<form action="delet.php" method="POST">
-				  <button type="submit" name="id" value="'.$result['id'].'">X</button>
-				</form>
-				</th>
-				';	
-		  		// echo "<th><form action=delet.php method=\"POST\"><a href='' name=\"id\">X</a></form></th>";
+		    	echo '<th>
+				  		<button onclick="delet_user('.$result['id'].')">X</button>
+					</th>';	
 		  	echo "</tr>";
 		  }
 		  ?>

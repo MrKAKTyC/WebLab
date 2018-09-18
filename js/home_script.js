@@ -16,20 +16,6 @@ window.onclick = function(event) {
     }
 }
 
-// function delet_f(int id) {
-//       $.ajax({
-//            type: "POST",
-//            url: 'delet.php',
-//            success: function(data) {
-//             if (data){
-//               window.location.reload(); // This is not jQuery but simple plain ol' JS
-//             } else {
-//               alert("error");
-//             }
-//           }
-//       });
-//  }
-
 
 // New try
    $(document).ready(function(){
@@ -57,4 +43,28 @@ window.onclick = function(event) {
               location.reload(); 
           });
       });
+      $("#l_in").click(function(){
+        let log = $("#l_login").value;
+        let pas = $("#l_psw").value;
+        $.post("login.php",
+            {
+              login: log,
+              password: pas
+            },
+            function(data){
+              alert(data);
+              location.reload();
+            }
+          )
+      });
   });
+
+function delet_user(user_id) {
+    $.post("delet.php",
+  {
+    id: user_id
+  },
+  function(data){
+      location.reload(); 
+  });
+}
