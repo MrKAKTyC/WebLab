@@ -20,10 +20,8 @@ if($con){
 	$res = mysqli_query($con, "SELECT * FROM users WHERE login='".$_POST['login']."' AND password='".$_POST['password']."'");
 
 		while($result = mysqli_fetch_assoc($res)) {
-		  	echo "$result[id]";
 		  	$_SESSION['role']=$result['role'];
 		  	$_SESSION['login']= $result['Login'];
-		  	// header('Location: index.php');
 		}
 
 	} else {
@@ -34,4 +32,3 @@ if($con){
 }
 
 ?>
-<a href="/">Home</a>

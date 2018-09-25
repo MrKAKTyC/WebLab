@@ -44,15 +44,15 @@ window.onclick = function(event) {
           });
       });
       $("#l_in").click(function(){
-        let log = $("#l_login").value;
-        let pas = $("#l_psw").value;
+        let log = $("#l_login").val();
+        let pas = $("#l_psw").val();
+        console.log ($('#l_login'));
         $.post("login.php",
             {
               login: log,
               password: pas
             },
             function(data){
-              alert(data);
               location.reload();
             }
           )
@@ -67,4 +67,25 @@ function delet_user(user_id) {
   function(data){
       location.reload(); 
   });
+}
+
+function add_user() {
+  let log = $("#r_login").val();
+  let pas = $("#r_psw").val();
+  let role = $("#r_role").val();
+  let name = $("#r_name").val();
+  let surname = $("#r_surname").val();
+  $.post("register.php",
+      {
+        login: log,
+        psw: pas,
+        role: role,
+        name: name,
+        surname: surname
+      },
+      function(data, status){
+        console.log(data.status)
+        $("#main_tab").append("<tr><th>500</th><th>"+log+"</th><th>"+name+"</th><th>"+surname+"</th><th>"+role+"</th></tr>");
+      }
+    )
 }

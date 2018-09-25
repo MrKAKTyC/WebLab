@@ -1,8 +1,7 @@
 	<!-- Login form -->
-	<div id="id01" class="modal">
-	  <!-- <form class="modal-content animate" action="/login.php" method="POST"> -->
+	<div id="id01" class="modal ">
 	    <div class="imgcontainer">
-	      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+	      <span onclick="$('#id01').hide()" class="close" title="Close Modal">&times;</span>
 	    </div>
 	    <div class="container">
 	      <label for="uname"><b>Login</b></label>
@@ -13,7 +12,6 @@
 	        
 	      <button id="l_in" class="button_lgn">Login</button>
 	    </div>
-	  <!-- </form> -->
 	</div>
 
 	</body>

@@ -8,13 +8,11 @@
 		$dbname = "Base";
 
 		$con = mysqli_connect($dbhost, $dbuser, $dbpass);
-
 		$db = mysqli_select_db($con, $dbname);
-
 		$res = mysqli_query($con, "SELECT * FROM users");
 	?>
 	<div class="main">
-		<table>
+		<table id="main_tab">
 		  <caption>
 		    Зареєстровані користувачі
 		  </caption>
@@ -57,7 +55,7 @@
 		</table>
 		<?php
 		if($_SESSION['role']=='admin'){
-			echo "<button onclick=\"document.getElementById('id_reg').style.display='block'\" style=\"width:auto; display: block; \" margin-left: auto; margin-right: auto;\">Add new user</button>";
+			echo "<button onclick=\"$('#id_reg').css('display','block')\" style=\"width:auto; display: block; \" margin-left: auto; margin-right: auto;\">Add new user</button>";
 		}
 		?>
 	</div>
@@ -65,31 +63,31 @@
 
 		<!-- Register form -->
 	<div id="id_reg" class="modal">
-	  <form class="modal-content animate" action="register.php" method="POST">
+	  <div class="modal-content animate">
 	    <div class="imgcontainer">
 	      <span onclick="document.getElementById('id_reg').style.display='none'" class="close" title="Close Modal">&times;</span>
 	    </div>
 	    <div class="container">
 	      <label for="login"><b>Login</b></label>
-	      <input type="text" placeholder="Enter nogin" name="login" required>
+	      <input id="r_login" type="text" placeholder="Enter login" name="login" required>
 
 		  <label for="psw"><b>Password</b></label>
-	      <input type="password" placeholder="Enter Password" name="psw" required>
+	      <input id="r_psw" type="password" placeholder="Enter Password" name="psw" required>
 	      <br>
-	      <label for="psw"><b>Role</b></label><br>
-	      <select  name="role">
+	      <label for="psw"><b>Role</b></label>
+	      <select id="r_role" name="role">
 	        <option>user</option>
 	        <option>admin</option>
 	      </select>
 	      <br>
 	      <label for="name"><b>Name</b></label>
-	      <input type="text" placeholder="Enter name" name="name" required>
+	      <input id="r_name" type="text" placeholder="Enter name" name="name" required>
 	      <label for="surname"><b>Surname</b></label>
-	      <input type="text" placeholder="Enter surname" name="surname" required>
+	      <input id="r_surname" type="text" placeholder="Enter surname" name="surname" required>
 	      <br>
-	      <button type="submit">Add</button>
+	      <button id="r_btn" onclick="add_user()">Add</button>
 	    </div>
-	  </form>
+	  </div>
 	</div>
 
 	<?php include 'footer.php';?>
