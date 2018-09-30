@@ -31,41 +31,59 @@
 		  </tr>
 		  <?php
 		  while($result = mysqli_fetch_assoc($res)) {
-		  	echo "<tr>";
-		  	echo "<th>$result[id]</th>";
-		  	echo "<th>";
+		  	echo "<tr id='".$result['id']."'>";
+		  	echo "<td>$result[id]</td>";
+		  	echo "<td>";
 		  	if(!($_SESSION['role']=='guest')) {
 		  		echo "<a href='profile.php?user=".$result['Login']."'>$result[Login]</a>";
 		  	} else {
 		  		echo "$result[Login]";
-		  		echo !$_SESSION['role']=='guest';
+		  		// echo !$_SESSION['role']=='guest';
 		  	}
-		  	"</th>";
-		  	echo "<th>$result[Name]</th>";
-		  	echo "<th>$result[Surname]</th>";
-		  	echo "<th>$result[role]</th>";
-		  	echo '<th><img src='.$result['Photo'].' height="128" width="128"></th>';
+		  	"</td>";
+		  	echo "<td>$result[Name]</td>";
+		  	echo "<td>$result[Surname]</td>";
+		  	echo "<td>$result[role]</td>";
+		  	echo '<td><img src='.$result['Photo'].' height="128" width="128"></td>';
 		    if($_SESSION['role']=='admin')
-		    	echo '<th>
+		    	echo '<td>
 				  		<button onclick="delet_user('.$result['id'].')">X</button>
-					</th>';	
+					</td>';	
 		  	echo "</tr>";
 		  }
 		  ?>
 		</table>
 		<?php
 		if($_SESSION['role']=='admin'){
-			echo "<button onclick=\"$('#id_reg').css('display','block')\" style=\"width:auto; display: block; \" margin-left: auto; margin-right: auto;\">Add new user</button>";
+			echo "<button id='add_usr' onclick=\"$('#id_reg').css('display','block')\" style=\"width:auto; display: block; \" margin-left: auto; margin-right: auto;\">Add new user</button>";
 		}
 		?>
 	</div>
 
 
+		<!-- Login form -->
+	<div id="id01" class="modal ">
+		<div class="modal-content animate">
+		    <div class="imgcontainer">
+		      <span onclick="$('#id01').hide()" class="close" title="Close Modal">&times;</span>
+		    </div>
+		    <div class="container">
+		      <label for="uname"><b>Login</b></label>
+		      <input id="l_login" type="text" placeholder="Enter Login" name="login" required>
+
+		      <label for="psw"><b>Password</b></label>
+		      <input id="l_psw" type="password" placeholder="Enter Password" name="password" required>
+		        
+		      <button id="l_in" onclick="log_in()" class="button_lgn">Login</button>
+		    </div>
+		</div>
+	</div>
+
 		<!-- Register form -->
 	<div id="id_reg" class="modal">
 	  <div class="modal-content animate">
 	    <div class="imgcontainer">
-	      <span onclick="document.getElementById('id_reg').style.display='none'" class="close" title="Close Modal">&times;</span>
+	      <span onclick="$('#id_reg').hide()" class="close" title="Close Modal">&times;</span>
 	    </div>
 	    <div class="container">
 	      <label for="login"><b>Login</b></label>

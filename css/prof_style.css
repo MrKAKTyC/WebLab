@@ -12,14 +12,18 @@
 
 .pic{
 	float: right;
+	width: 50%;
+	border: 2px double black;
 }
 
 .leftline{
 	float: left;
+	width: 50%;
 }
 
 .rightline{
 	float: right;
+	width: 50%;
 }
 
 .photo{

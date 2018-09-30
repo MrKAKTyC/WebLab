@@ -1,15 +1,14 @@
 <?php
- session_start();
-
-$dbhost="localhost"; //replace with your hostname
-
-$dbuser = "root"; //replace with your admin username
-
-$dbpass = ""; //password of your admin
-
+header('Content-type: application/json');
+session_start();
+$dbhost="localhost";
+$dbuser = "root";
+$dbpass = "";
 $dbname = "Base";
 
 $con = mysqli_connect($dbhost, $dbuser, $dbpass);
+
+$answer = array();
 
 if($con){
 
@@ -22,6 +21,9 @@ if($con){
 		while($result = mysqli_fetch_assoc($res)) {
 		  	$_SESSION['role']=$result['role'];
 		  	$_SESSION['login']= $result['Login'];
+		  	$answer['login']=$result['Login'];
+		  	$answer['role']=$result['role'];
+		  	echo json_encode($answer);
 		}
 
 	} else {

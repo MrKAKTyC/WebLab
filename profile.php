@@ -27,38 +27,40 @@
 		echo "could not connect to server";
 	}
 ?>
-
-<html>
 	<div class="profile main">
-		<form method="POST" action="update_info.php">
+		<!-- MAININFO DIV -->
 		<div class="info">
-			<p class="leftline">Login</p>
-			<p class="rightline"><input type="text" name="login" value="<?php
-			 echo $result['Login'].'"';
-			 if($c_role!='admin'){
-				 	echo ' readonly';
-			 } 
-			 ?>></p>
-			<br>
-			<p class="leftline">Name</p>
-			<p class="rightline"><input type="text" name="name" value="<?php
-				echo $result['Name'].'"';
-				if($result['Login']!=$_SESSION['login'] & $c_role!='admin'){
-					echo ' readonly';
-				} 
-			?>></p>
-			<br>
-			<p class="leftline">Surname</p>
-			<p class="rightline"><input type="text" name="sname" value="<?php
-			 echo $result['Surname'].'"';
-				if($result['Login']!=$_SESSION['login'] & $c_role!='admin'){
-					echo ' readonly';
-				} 
-			?>></p>
-			<br>
-			<p class="leftline">Role</p>
-			<p class="rightline">
-				<select name="role" <?php if($c_role=='user') {echo "disabled";}?>>
+			<p>
+				<span class="leftline">Login</span>
+				<span class="rightline"><input id="u_login" type="text" name="login" value="<?php
+				 echo $result['Login'].'"';
+				 if($c_role!='admin'){
+					 	echo ' readonly';
+				 } 
+				 ?>></span>
+			</p>
+			<p>
+				<span class="leftline">Name</span>
+				<span class="rightline"><input id="u_name" type="text" name="name" value="<?php
+					echo $result['Name'].'"';
+					if($result['Login']!=$_SESSION['login'] & $c_role!='admin'){
+						echo ' readonly';
+					} 
+				?>></span>
+			</p>
+			<p>
+				<span class="leftline">Surname</span>
+				<span class="rightline"><input id="u_surname" type="text" name="sname" value="<?php
+				 echo $result['Surname'].'"';
+					if($result['Login']!=$_SESSION['login'] & $c_role!='admin'){
+						echo ' readonly';
+					} 
+				?>></span>
+			</p>
+			<p>
+			<span class="leftline">Role</span>
+			<span class="rightline">
+				<select id="u_role" name="role" <?php if($c_role=='user') {echo "disabled";}?>>
 				<?php
 					if($result['role']=='user') {
 						echo "
@@ -72,25 +74,28 @@
 						";
 					}
 				?>
-				</select></p>
+				</select></span>
 				<input type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
-				<?php if($c_role=='admin' || $_SESSION['login'] == $result['Login']) {echo "<button type=\"submit\">Save</button>";}?>
-			</form>
-			<br>
-			<!-- PASSWORD DIV -->
+				<?php if($c_role=='admin' || $_SESSION['login'] == $result['Login']) {echo "<button onclick='change_data()' type=\"submit\">Save</button>";}?>
+			</p>
+		<!-- PASSWORD DIV -->
 			<div <?php if($result['Login']!=$_SESSION['login']) {echo ' style = "display: none"';}?>>
-				<form method="POST" action="update_psw.php">
-					<p class="leftline">Old password</p>
-					<p class="rightline"><input type="password" name="old_psw"></p>
-					<br>
-					<p class="leftline">New password</p>
-					<p class="rightline"><input type="password" name="new_psw"></p>
-					<br>
-					<p class="leftline">New password</p>
-					<p class="rightline"><input type="password" name="new_psw2"></p>
-					<input type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
-					<p><button type="submit">Reset password</button></p>
-				</form>
+				<!-- <form method="POST" action="update_psw.php"> -->
+					<p>
+						<span class="leftline">Old password</span>
+						<span class="rightline"><input id="u_oldpsw" type="password" name="old_psw"></span>
+					</p>
+					<p>
+						<span class="leftline">New password</span>
+						<span class="rightline"><input id="u_newpsw" type="password" name="new_psw"></span>
+					</p>
+					<p>
+						<span class="leftline">New password</span>
+						<span class="rightline"><input id="u_sbmtpsw" type="password" name="new_psw2"></span>
+					</p>
+					<input id="psw_u_name" type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
+					<span><button onclick="change_password()" type="submit">Reset password</button></span>
+				<!-- </form> -->
 			</div>
 		</div>
 		<!-- IMAGE DIV -->
@@ -106,11 +111,6 @@
 			</form>
 			
 		</div>
-		<script type="text/javascript">
-			function go_home() {
-				window.location.replace("index.php");
-			}
-		</script>
 		<div style="clear: both; margin-left: auto; margin-right: auto;">
 			<button onclick="go_home()";>Back</button>
 		</div>

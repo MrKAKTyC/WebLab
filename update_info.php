@@ -18,8 +18,7 @@ echo "Could not connect to database ".mysqli_error($con);
 		$sql = "UPDATE users SET Name='".$_POST['name']."', Surname='".$_POST['sname']."', role='".$_POST['role']."' WHERE Login='".$_POST['u_name']."'";
 		echo $sql."<br>";
 		$res = mysqli_query($con, $sql);
-
-		header("Location:profile.php?user=".$_POST['u_name']);
+		echo "$res";
 	}
 } else {
 
