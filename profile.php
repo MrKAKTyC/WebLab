@@ -100,15 +100,16 @@
 		</div>
 		<!-- IMAGE DIV -->
 		<div class="pic">
-			<form enctype="multipart/form-data" method="POST" action="update_foto.php">
-				<img src=<?php echo $result['Photo']; ?> height="128" width="128">
+			<!-- <form enctype="multipart/form-data" method="POST" action="update_foto.php"> -->
+			
+				<img src=<?php echo $result['Photo']; ?> id="prof_pic" height="128" width="128">
 				<br>
-				<input type="hidden" name="u_name" value="<?php echo $result['Login']; ?>" >
-				<input type="hidden" name="f_name" value="<?php echo $result['Photo']; ?>" >
+				<input type="hidden" id="foto_user_name" value="<?php echo $result['Login']; ?>" >
+				<input type="hidden" id="old_photo" value="<?php echo $result['Photo']; ?>" >
 				<?php if($c_role=='admin' || $_SESSION['login'] == $result['Login']) {echo '
-				<input type="file" name="fileToUpload" id="fileToUpload">
-				<button type="submit">Update</button>';}?>
-			</form>
+				<input type="file" name="new_photo" id="fileToUpload">
+				<button onclick="change_image()">Update</button>';}?>
+			<!-- </form> -->
 			
 		</div>
 		<div style="clear: both; margin-left: auto; margin-right: auto;">
