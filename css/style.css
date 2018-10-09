@@ -3,6 +3,7 @@
     color: white;
     padding: 20px;
 		text-align: center;
+    clear: both;
 }
 
 .main {
@@ -26,7 +27,7 @@ table {
 }
 caption {
   padding: 10px;
-  color: white;
+  color: purple;
   background: #8FD4C1;
   font-size: 18px;
   text-align: left;
@@ -46,4 +47,35 @@ tr:nth-child(odd) {
 }
 tr:nth-child(even) {
   background: #E8E6D1;
+}
+
+.menu {
+  padding: 10px;
+  background: #8FD4C1;
+  font-size: 18px;
+  text-align: left;
+  font-weight: bold;
+}
+.menu a {
+  color: purple;
+}
+
+
+.content{
+  background-color: lightblue;
+}
+
+.content_block {
+
+    background-color: #8FD4C1;
+    text-align: center;
+    width: 30%;
+    float: left;
+    padding: 15px;
+    border: 4px double blue;
+
+}
+
+audio {
+  width: 100%;
 }

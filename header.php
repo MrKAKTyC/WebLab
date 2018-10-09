@@ -18,6 +18,11 @@
 	</head>
 	<body>
     <div class="header">Club hub</div>
+    <div class="menu">
+    	<a href="index.php">Home</a>
+    	<a href="media.php">Media</a>
+    	<a href="animation.php">Animation</a>
+    </div>
 	<div class="main">
 		<p id="Greeting" style="float: left; margin-left: 10px;"> Welcome, 
 			<?php
