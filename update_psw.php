@@ -24,7 +24,8 @@ if($con){
 				if ($_POST['old_psw']==$result['Password']) {
 					$sql = "UPDATE users SET Password='".$_POST['new_psw']."' WHERE Login='".$_POST['u_name']."'";
 					$res = mysqli_query($con, $sql);
-					header("Location:profile.php?user=".$_POST['u_name']);
+					// header("Location:profile.php?user=".$_POST['u_name']);
+					echo "Password changed";
 				} else {
 					echo "Wrong Password";
 				}
