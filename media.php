@@ -14,7 +14,7 @@ echo '<div class = content>';
 	
 while($result = mysqli_fetch_assoc($res)) {
 	echo "<div class = content_block>";
-	echo $result['name'];
+	echo $result['name'].'<br>';
 	if ($result['local']==0) {
 		echo $result['src'];
 	} else {
