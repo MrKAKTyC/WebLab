@@ -1,0 +1,10 @@
+canvas{
+	/*width: 60%;*/
+	/*background-color: blue;*/
+}
+
+.config{
+	width: 30%;
+	float: right;
+	color: red;
+}
