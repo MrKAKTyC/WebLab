@@ -78,7 +78,6 @@ window.onload = function() {
     	}else{
     		ball.velY = -(speed);
     	}
-    	console.log(ball.x +"  "+ball.y+" || "+speed);
   	};
 
 	function loop() {  
@@ -86,7 +85,6 @@ window.onload = function() {
 	  ctx.fillRect(0, 0, width, height);
 	  ball.draw();
 	  ball.update();
-	  console.log()
 	  id = requestAnimationFrame(loop);
 	}
 	
