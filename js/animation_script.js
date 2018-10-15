@@ -1,86 +1,108 @@
-var X_loc = 100, Y_loc = 10;
-var speed = 1, x_speed = 1, y_speed = 1;
-var timer = 0;
-var shape = "circle";
-var color = "red";
-var context;
-var width;
-var height;
-var size = 10;
+var speed = 1, id;
+var shape = "circle", color = "red";
 
+window.onload = function() {
 
-function start() {
-	if(timer == 0)
-		timer = setInterval(animate, 10*speed);
-}
+	var canvas = document.querySelector('canvas');
+	var ctx = canvas.getContext('2d');
 
-function stop() {
-	clearInterval(timer);
-	timer = 0;
-}
+	var width = canvas.width = window.innerWidth;
+	var height = canvas.height = window.innerHeight;
 
-function updateSpeed(newSpeed){
-	speed = newSpeed;
-	stop();
-	start();
-}
-
-function updateColor(newColor){
-	color = newColor;
-}
-
-function updateShape(newShape){
-	shape = newShape;
-}
-
-
-function animate(){
-    if (X_loc + this.radius > innerWidth || X_loc - this.radius < 0){
-    	this.dx = -this.dx
-  	}
-    if (this.y + this.radius > innerHeight || this.y - this.radius < 0){
-    	this.dy = -this.dy
+	function random(min,max) {
+	  var num = Math.floor(Math.random()*(max-min)) + min;
+	  return num;
 	}
-	// if(x_speed == 1){
-	// 	if(X_loc+1+size >= width){
-	// 		x_speed *= (-1);
-	// 		console.log("Max x: " + x_speed);
-	// 	}
-	// } else {
-	// 	if(X_loc-1 <= 0){
-	// 		x_speed *= (-1);
-	// 		console.log("Min x: " + x_speed);
-	// 	}
-	// }
-	// if(y_speed == 1){
-	// 	if(X_loc+1+size >= width){
-	// 		y_speed *= (-1);
-	// 		console.log("Max y: " + y_speed);
-	// 	}
-	// } else {
-	// 	if(X_loc-1 <= 0){
-	// 		y_speed *= (-1);
-	// 		console.log("Min y: " + y_speed);
-	// 	}
-	// }
-	 X_loc += x_speed;
-	 Y_loc += y_speed;
- 	repaint();
-}
 
-function repaint(){	
-	context.rect(X_loc,Y_loc,size,size);
-	// context.stroke();
-	context.fill();
-}
+	function Figure() {
+	  this.x = random(0, width);
+	  this.y = random(0, height);
+	  this.velX = random(-10, 10);
+	  this.velY = random(-10, 10);
+	  this.size = random(10, 20);
+	}
+	Figure.prototype.draw = function() {
+	  ctx.beginPath();
+	  ctx.fillStyle = color;
+	  if(shape == "circle")
+	  {
+	  	ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+	  } else {
+	  	ctx.rect(this.x, this.y, this.size, this.size);
+	  }
+	  ctx.fill();
+	}
 
-window.onload = function(){
-	let canvas = document.getElementById('canv');
-	width = canvas.width = window.innerWidth;
-	height = canvas.height = window.innerHeight;
-	context = canvas.getContext('2d');
-	context.fillStyle = "white";
-	// context.rect(0,0,width,height);
-	context.fill();
-	context.fillStyle = "green";
-}
+	Figure.prototype.update = function() {
+	  if ((this.x + this.size) >= width) {
+		this.velX = -(this.velX);
+	  }
+
+	  if ((this.x - this.size) <= 0) {
+		this.velX = -(this.velX);
+	  }
+
+	  if ((this.y + this.size) >= height) {
+		this.velY = -(this.velY);
+	  }
+
+	  if ((this.y - this.size) <= 0) {
+		this.velY = -(this.velY);
+	  }
+
+	  this.x += this.velX;
+	  this.y += this.velY;
+	}
+	let start = document.getElementById('start_btn');
+	let stop = document.getElementById('stop_btn');
+	let speed_btn = document.getElementById('speed');
+	var ball = new Figure();
+
+	start.onclick = function() {
+		if(id == 0)
+			id = requestAnimationFrame(loop);
+	}
+	stop.onclick = function() {
+		cancelAnimationFrame(id);
+		id = 0;
+	}
+	speed_btn.oninput = function() {
+    	speed = parseInt(speed_btn.value);
+    	if(ball.velX >= 0){
+    		ball.velX = speed;
+    	}else{
+    		ball.velX = -(speed);
+    	}
+    	if(ball.velY >= 0){
+    		ball.velY = speed;
+    	}else{
+    		ball.velY = -(speed);
+    	}
+    	console.log(ball.x +"  "+ball.y+" || "+speed);
+  	};
+
+	function loop() {  
+	  ctx.fillStyle = 'rgba(173, 216, 230, 0.25)';
+	  ctx.fillRect(0, 0, width, height);
+	  ball.draw();
+	  ball.update();
+	  console.log()
+	  id = requestAnimationFrame(loop);
+	}
+	
+	loop();
+};
+
+	function updateSpeed(newSpeed){
+		speed = newSpeed;
+		ball.velX = ball.velX*newSpeed;
+		ball.velY = ball.velY*newSpeed;
+	}
+
+	function updateColor(newColor){
+		color = newColor;
+	}
+
+	function updateShape(newShape){
+		shape = newShape;
+	}
