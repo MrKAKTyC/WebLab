@@ -1,7 +1,7 @@
 <html>
 	<?php 
 		include 'header.php';
-
+		require('db_worker.php');
 		$dbhost="localhost";
 		$dbuser = "root"; 
 		$dbpass = ""; 
@@ -17,8 +17,8 @@
 		    Зареєстровані користувачі
 		  </caption>
 		  <tr>
-		    <th>id</th>
-		    <th>Логін</th>
+		    <th id="id_col">id</th>
+		    <th id="log_col">Логін</th>
 		    <th>Ім'я</th>
 		    <th>Прізвище</th>
 		    <th>Роль</th>

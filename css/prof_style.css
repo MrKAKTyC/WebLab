@@ -1,19 +1,12 @@
 .profile{
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
+    display: grid;
+  	grid-template-columns: 1fr 1fr;
 }
 
 .info{
 	display: block;
-	float: left;	
-	border: 3px double black;
-}
-
-.pic{
-	float: right;
-	width: 50%;
-	border: 2px double black;
 }
 
 .leftline{
@@ -28,8 +21,4 @@
 
 .photo{
 	float: right;
-}
-
-body{
-	/*background: lightblue;*/
 }
