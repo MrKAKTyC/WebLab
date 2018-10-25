@@ -62,5 +62,3 @@ function change_image(){
 function go_home() {
 	window.location.replace("index.php");
 }
-
-

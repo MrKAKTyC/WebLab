@@ -17,8 +17,8 @@
 		    Зареєстровані користувачі
 		  </caption>
 		  <tr>
-		    <th id="id_col">id</th>
-		    <th id="log_col">Логін</th>
+		    <th><button onclick="sort_id()">id</button></th>
+		    <th><button onclick="sort_login()">Логін</button></th>
 		    <th>Ім'я</th>
 		    <th>Прізвище</th>
 		    <th>Роль</th>

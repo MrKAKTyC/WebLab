@@ -1,4 +1,6 @@
 var modal = document.getElementById('id01');
+var login_sort_dir = "ASC"
+var id_sort_dir = "ASC"
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -76,5 +78,81 @@ function add_user() {
         let new_row = $("<tr></tr>").html(data);
         $("#main_tab").append(new_row);
         $('#id_reg').hide();
-      })
+      });
+}
+
+function sort_id(){
+  $.post("sort.php",
+      {
+        col: "id",
+        dir: id_sort_dir
+      },
+      function(data){
+        $('tr').not(":first").remove();
+        let newTab = "";
+        let result = $.parseJSON(data);
+        console.log(result);
+        for (x in result) {
+          newTab += "<tr id='"+result[x].id+"'>";
+          newTab += "<td>"+result[x].id+"</td>";
+          newTab += "<td>";
+          if($('#l_out').length) {
+            newTab += "<a href='profile.php?user="+result[x].Login+"'>"+result[x].Login+"</a>";
+          } else {
+            newTab += result[x].Login;
+          }
+          "</td>";
+          newTab += "<td>"+result[x].Name+"</td>";
+          newTab += "<td>"+result[x].Surname+"</td>";
+          newTab += "<td>"+result[x].role+"</td>";
+          newTab += '<td><img src='+result[x].Photo+' height="128" width="128"></td>';
+          if($('#add_usr').length)
+            newTab += '<td><button onclick="delet_user('+result[x].id+')">X</button></td>'; 
+          newTab += "</tr>";
+        }
+        $("#main_tab").append(newTab);
+      });
+  if(id_sort_dir == "ASC"){
+    id_sort_dir = "DESC";
+  } else {
+    id_sort_dir = "ASC";
+  }
+}
+
+function sort_login(){
+  $.post("sort.php",
+      {
+        col: "LOGIN",
+        dir: login_sort_dir
+      },
+      function(data){
+        $('tr').not(":first").remove();
+        let newTab = "";
+        let result = $.parseJSON(data);
+        console.log(result);
+        for (x in result) {
+          newTab += "<tr id='"+result[x].id+"'>";
+          newTab += "<td>"+result[x].id+"</td>";
+          newTab += "<td>";
+          if($('#l_out').length) {
+            newTab += "<a href='profile.php?user="+result[x].Login+"'>"+result[x].Login+"</a>";
+          } else {
+            newTab += result[x].Login;
+          }
+          "</td>";
+          newTab += "<td>"+result[x].Name+"</td>";
+          newTab += "<td>"+result[x].Surname+"</td>";
+          newTab += "<td>"+result[x].role+"</td>";
+          newTab += '<td><img src='+result[x].Photo+' height="128" width="128"></td>';
+          if($('#add_usr').length)
+            newTab += '<td><button onclick="delet_user('+result[x].id+')">X</button></td>'; 
+          newTab += "</tr>";
+        }
+        $("#main_tab").append(newTab);
+      });
+    if(login_sort_dir == "ASC"){
+    login_sort_dir = "DESC";
+  } else {
+    login_sort_dir = "ASC";
+  }
 }
