@@ -3,7 +3,6 @@ function change_data(){
 	let old_name  = $("#u_name").val();
 	let old_surname = $("#u_surname").val();
 	let old_role = $("#u_role").val();
-	console.log(old_name+" "+old_surname+" "+old_login+" "+old_role);
 	$.post("update_info.php",
 		{
 			name : old_name,
@@ -21,7 +20,6 @@ function change_password() {
 	let newpas = $("#u_newpsw").val();
 	let newpas2 = $("#u_sbmtpsw").val();
 	let name = $("#psw_u_name").val();
-	console.log(oldpas+" "+newpas+" "+newpas2+" "+name);
 	$.post("update_psw.php",
 		{
 			old_psw : oldpas,
@@ -43,7 +41,6 @@ function change_image(){
 	Form_with_data.append('u_name',user_name);
 	Form_with_data.append('old_photo',old_photo_file);
 	Form_with_data.append('new_photo',files);
-	console.log(user_name+" "+old_photo_file);
     $.ajax({
     url: 'update_foto.php',
     type: 'post',
@@ -51,8 +48,10 @@ function change_image(){
     contentType: false,
     processData: false,
     success: function(data, response) {
-        if(response != 0){
-            $("#prof_pic").delay( 2000 ).attr( 'src', old_photo_file + '?dt='+ (new Date()));
+        if(response == "success"){
+        	let type = files.name.split('.')[1];
+        	let random = "?random="+new Date().getTime();
+            $("#prof_pic").attr( 'src', "photo/"+user_name+"."+type+random);
         }else{
             alert('file not uploaded');
         }

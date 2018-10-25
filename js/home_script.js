@@ -21,46 +21,8 @@ window.onclick = function(event) {
 function log_in(){
   let log = $("#l_login").val();
   let pas = $("#l_psw").val();
+  drawTab();
 
-  $.ajax({
-    url: "login.php",
-    type: "POST",
-    data:{
-        login: log,
-        password: pas
-      },
-    error: function(data, status){
-      console.log(status);
-    },
-    complete: function(data) {
-        console.log("done");
-    },
-    success: function(data){
-        let result = $.parseJSON(JSON.stringify(data));
-        console.log("done login");
-        console.log(result);
-        // change login to logout
-        $("#ac_action").html('<button id = "l_out" onclick="log_out()" style="width:auto;" >Logoff</button>');
-        // change user name
-        $("#Greeting").text('Welcome, '+result.login);
-        // change tab logins to links
-        $("th:last-child").after('<th>Видалити</th>');
-        $("tr").each(function(index, element){
-            let name = $("td:nth-child(2)", element).text();
-            $("td:nth-child(2)", element).html('<a href=profile.php?user='+name+'>'+name+'</a>');
-          });
-        // if admin add X btn
-        if (result.role == 'admin') {
-          $("tr").each(function(index, element){
-            let txt = $("td:first-child", element).text();
-            $("td:last-child", element).after('<td><button onclick="delet_user('+txt+')">X</button></td>');
-          });
-        // if admin add ADD btn 
-        $("table").append($("<button id='add_usr' onclick=$('#id_reg').css('display','block')>Add new user</button>"));
-        }
-        $("#id01").hide();
-      } 
-  })
 }   
 
 function log_out(){

@@ -56,6 +56,7 @@ if ($uploadOk == 0) {
 			$sql = "UPDATE users SET Photo='".$target_file."' WHERE Login='".$_POST['u_name']."'";
 			echo $sql;
 			$res = mysqli_query($con, $sql);
+            
 		}
 	} else {
 		echo "could not connect to server";
