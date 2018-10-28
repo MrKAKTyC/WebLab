@@ -1,18 +1,8 @@
+
+<div class = content>
 <?php
-include 'header.php';
-
-$dbhost="localhost";
-$dbuser = "root"; 
-$dbpass = ""; 
-$dbname = "Base";
-
-$con = mysqli_connect($dbhost, $dbuser, $dbpass);
-$db = mysqli_select_db($con, $dbname);
-$res = mysqli_query($con, "SELECT * FROM media");
-
-echo '<div class = content>';
 	
-while($result = mysqli_fetch_assoc($res)) {
+while($result = mysqli_fetch_assoc($data)) {
 	echo "<div class = content_block>";
 	echo $result['name'].'<br>';
 	if ($result['local']==0) {
@@ -33,8 +23,6 @@ while($result = mysqli_fetch_assoc($res)) {
 	echo "</div>";
 }
 
-echo '</div>';
-
-
-include 'footer.php';
 ?>
+</div>
+

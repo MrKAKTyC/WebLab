@@ -1,9 +1,5 @@
-<?php
-include 'header.php';
-?>
-
-<link rel = "stylesheet" href = "css/animation_style.css">
-<script type="text/javascript" src="js/animation_script.js"></script>
+<link rel = "stylesheet" href = "/assets/css/animation_style.css">
+<script type="text/javascript" src="/assets/js/animation_script.js"></script>
 
 <canvas id="canv">
 	
@@ -17,7 +13,3 @@ include 'header.php';
 	<input type="button" id="start_btn" value = "Start" name="start">
 	<input type="button" id="stop_btn" value = "Stop" name="stop">
 </div>
-
-<?php
-include 'footer.php';
-?>
