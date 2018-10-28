@@ -1,8 +1,8 @@
 <div class="main">
 	<p id="Greeting" style="float: left; margin-left: 10px;"> Welcome, 
 		<?php
-		$_SESSION['role'] = 'admin';
-		$_SESSION['login'] = 'Max';
+		// $_SESSION['role'] = 'admin';
+		// $_SESSION['login'] = 'Max';
 		if($_SESSION['role']=='guest'){
 			echo "guest";
 		} else {
@@ -81,10 +81,10 @@
 		<div class="container">
 			<label for="uname"><b>Login</b></label>
 			<input id="l_login" type="text" placeholder="Enter Login" name="login" required>
-
+			<br>
 			<label for="psw"><b>Password</b></label>
 			<input id="l_psw" type="password" placeholder="Enter Password" name="password" required>
-
+			<br>
 			<button id="l_in" onclick="log_in()" class="button_lgn">Login</button>
 		</div>
 	</div>

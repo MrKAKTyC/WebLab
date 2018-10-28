@@ -1,5 +1,5 @@
-<link rel = "stylesheet" href = "/css/animation_style.css">
-<script type="text/javascript" src="/js/animation_script.js"></script>
+<link rel = "stylesheet" href = "/assets/css/animation_style.css">
+<script type="text/javascript" src="/assets/js/animation_script.js"></script>
 
 <canvas id="canv">
 	

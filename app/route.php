@@ -4,6 +4,9 @@ class Route
 	static function start()
 	{
 		session_start();
+		if(!isset($_SESSION['role'])){
+			$_SESSION['role'] = 'guest';
+		}
 		// контроллер и действие по умолчанию
 		$controller_name = 'Main';
 		$action_name = 'index';

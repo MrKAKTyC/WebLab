@@ -32,7 +32,7 @@ class Model_main extends Model
 	public function add($login, $psw, $role, $name, $surname)
 	{
 		$return = array();
-		$sql = "INSERT INTO `users`(`Login`, `Password`, `role`, `Name`,`Surname`, `Photo`) VALUES ('".$login."','".$psw."','".$role."','".$name."','".$surname."','img/def.png')";
+		$sql = "INSERT INTO `users`(`Login`, `Password`, `role`, `Name`,`Surname`, `Photo`) VALUES ('".$login."','".$psw."','".$role."','".$name."','".$surname."','/assets/img/def.png')";
 		$this->base->make_request($sql);
 
 		$sql = "SELECT id FROM users WHERE Login = '".$login."'";
@@ -50,8 +50,9 @@ class Model_main extends Model
 		while($res = mysqli_fetch_assoc($result)) {
 		  	$_SESSION['role'] = $res['role'];
 		  	$_SESSION['login'] = $res['Login'];
-		  	$answer=$res;
+			return $res;
+		  	// $answer=$res;
 		}
-		return $answer;
+		// return $answer;
 	}
 }?>
